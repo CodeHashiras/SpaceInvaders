@@ -10,4 +10,6 @@ int main(int argc, char *argv[])
     GameGUI w;
     w.show();
     return a.exec();
+
+    int x = 0;
 }
