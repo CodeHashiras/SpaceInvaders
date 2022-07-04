@@ -2,6 +2,8 @@
 #define GAMEGUI_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QScreen>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameGUI; }

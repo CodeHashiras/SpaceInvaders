@@ -9,14 +9,16 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gui/GameGUI.cpp \
+    gui/Sprite.cpp \
     main.cpp \
-    GameGUI.cpp
 
 HEADERS += \
-    GameGUI.h
+    gui/GameGUI.h \
+    gui/Sprite.h
 
 FORMS += \
-    gamegui.ui
+    gui/gamegui.ui
 
 CONFIG += lrelease
 
@@ -24,3 +26,8 @@ CONFIG += lrelease
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    gui/images.qrc \
+
+DISTFILES +=

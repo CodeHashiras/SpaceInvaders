@@ -1,4 +1,4 @@
-#include "GameGUI.h"
+#include "gui/GameGUI.h"
 
 #include <QApplication>
 #include <QLocale>
