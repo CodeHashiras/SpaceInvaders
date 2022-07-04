@@ -86,6 +86,8 @@ protected slots:
 
 private:
 
+    const int   PIXMAP_QRECTF_X_AXIS_ORIGIN = 0;                        //
+    const int   PIXMAP_QRECTF_Y_AXIS_ORIGIN = 0;                        //
     const int   DEFAULT_FPS_VALUE = 15;                                 //
     const int   DEFAULT_CURRENT_ANIMATION = 0;                          //
     const int   DEFAULT_CURRENT_FRAME = 0;                              //
@@ -108,12 +110,6 @@ private:
 
     // AS: TODO
     int _spriteMaxAnimations;
-
-    // AS: TODO
-    int _spriteXAxisCenter;
-
-    // AS: TODO
-    int _spriteYAxisCenter;
 
     // AS: TODO
     int _currentAnimation;

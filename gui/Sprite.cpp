@@ -20,10 +20,6 @@ Sprite::Sprite(int width, int height, QString spritePath)
     _spriteMaxFrames = _pixmap->width()/_width;
     // Compute maximun columns value dividing sprite width by pixmap width
     _spriteMaxAnimations = _pixmap->height()/_height;
-    // Start x axis of pixmap RectF from the center
-    _spriteXAxisCenter = _width / 2;
-    // Start y axis of pixmap RectF from the center
-    _spriteYAxisCenter = _height / 2;
     // If base fps timer has not being actiated yet, start it
     if (!Sprite::_pBaseFpsTimer->isActive())
     {
@@ -55,8 +51,8 @@ void Sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     // AS: TODO
     int currentAnimationPixmapPosition = _currentAnimation * _height;
     // AS: TODO
-    painter->drawPixmap(0,
-                        0,
+    painter->drawPixmap(PIXMAP_QRECTF_X_AXIS_ORIGIN,
+                        PIXMAP_QRECTF_Y_AXIS_ORIGIN,
                         *_pixmap,
                         currentFramePixmapPosition,
                         currentAnimationPixmapPosition,
@@ -66,7 +62,7 @@ void Sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
 QRectF Sprite::boundingRect() const
 {
-    return QRectF(0, 0, _width, _height);
+    return QRectF(PIXMAP_QRECTF_X_AXIS_ORIGIN, PIXMAP_QRECTF_Y_AXIS_ORIGIN, _width, _height);
 }
 
 void Sprite::updateFrameSlot()
