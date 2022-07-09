@@ -14,6 +14,10 @@ class GameGUI : public QMainWindow
     Q_OBJECT
 
 public:
+
+    const int WINDOWS_MAXIMUM_WIDTH = 800;
+    const int WINDOWS_MAXIMUM_HEIGHT = 600;
+
     GameGUI(QWidget *parent = nullptr);
     ~GameGUI();
 
