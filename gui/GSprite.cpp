@@ -1,9 +1,9 @@
-#include "gui/Sprite.h"
+#include "gui/GSprite.h"
 
-int Sprite::_instanceCounter = 0;
-QTimer *Sprite::_pBaseFpsTimer = new QTimer();
+int GSprite::_instanceCounter = 0;
+QTimer *GSprite::_pBaseFpsTimer = new QTimer();
 
-Sprite::Sprite(int width, int height, QString spritePath)
+GSprite::GSprite(int width, int height, QString spritePath)
     : _fps(DEFAULT_FPS_VALUE)
     , _width(width)
     , _height(height)
@@ -13,7 +13,7 @@ Sprite::Sprite(int width, int height, QString spritePath)
     , _animationIdsMap()
 {
     // Increment global sprite instances counter
-    Sprite::_instanceCounter++;
+    GSprite::_instanceCounter++;
     // Create pixmap which represents sprite image
     _pixmap = new QPixmap(spritePath);
     // Compute maximun rows value dividing sprite height by pixmap height
@@ -21,30 +21,30 @@ Sprite::Sprite(int width, int height, QString spritePath)
     // Compute maximun columns value dividing sprite width by pixmap width
     _spriteMaxAnimations = _pixmap->height()/_height;
     // If base fps timer has not being actiated yet, start it
-    if (!Sprite::_pBaseFpsTimer->isActive())
+    if (!GSprite::_pBaseFpsTimer->isActive())
     {
-        Sprite::_pBaseFpsTimer->start(BASE_FPS_TIME_IN_MS);
+        GSprite::_pBaseFpsTimer->start(BASE_FPS_TIME_IN_MS);
     }
     // Connect timeout signal to update frame slot method
-    connect(Sprite::_pBaseFpsTimer, &QTimer::timeout, this, &Sprite::updateFrameSlot);
+    connect(GSprite::_pBaseFpsTimer, &QTimer::timeout, this, &GSprite::updateFrameSlot);
 }
 
-Sprite::~Sprite()
+GSprite::~GSprite()
 {
     // Disconnect timeout signal to update frame slot method
-    disconnect(Sprite::_pBaseFpsTimer, &QTimer::timeout, this, &Sprite::updateFrameSlot);
+    disconnect(GSprite::_pBaseFpsTimer, &QTimer::timeout, this, &GSprite::updateFrameSlot);
     // When the last sprite instance is destroyed, free timer pointer memory
-    if (Sprite::_instanceCounter == 1)
+    if (GSprite::_instanceCounter == 1)
     {
         // Stop timer before delete it
-        Sprite::_pBaseFpsTimer->stop();
-        delete Sprite::_pBaseFpsTimer;
+        GSprite::_pBaseFpsTimer->stop();
+        delete GSprite::_pBaseFpsTimer;
     }
     // Decrement global sprite instance counter
-    Sprite::_instanceCounter--;
+    GSprite::_instanceCounter--;
 }
 
-void Sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void GSprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     // AS: TODO
     int currentFramePixmapPosition = _currentFrame * _width;
@@ -60,12 +60,12 @@ void Sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
                         _height);
 }
 
-QRectF Sprite::boundingRect() const
+QRectF GSprite::boundingRect() const
 {
     return QRectF(PIXMAP_QRECTF_X_AXIS_ORIGIN, PIXMAP_QRECTF_Y_AXIS_ORIGIN, _width, _height);
 }
 
-void Sprite::updateFrameSlot()
+void GSprite::updateFrameSlot()
 {
     // AS: TODO
     _currentFrame = static_cast<int>(_currentTimeScaledFrame) % _spriteMaxFrames;
@@ -75,7 +75,7 @@ void Sprite::updateFrameSlot()
     update();
 }
 
-void Sprite::addAnimationId(QString animationId, int pixmapRow)
+void GSprite::addAnimationId(QString animationId, int pixmapRow)
 {
     // AS: TODO
     if (pixmapRow < _spriteMaxAnimations)
@@ -84,12 +84,12 @@ void Sprite::addAnimationId(QString animationId, int pixmapRow)
     }
 }
 
-void Sprite::setAnimation(QString animationId)
+void GSprite::setAnimation(QString animationId)
 {
     _currentAnimation = _animationIdsMap[animationId];
 }
 
-void Sprite::setFps(int fps)
+void GSprite::setFps(int fps)
 {
     // AS: TODO
     _fps = (fps <= MAX_FPS_VALUE) ? fps : MAX_FPS_VALUE;

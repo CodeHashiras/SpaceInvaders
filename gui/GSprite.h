@@ -14,8 +14,8 @@
  * copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
  **/
 
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef GSPRITE_H
+#define GSPRITE_H
 
 #include<QObject>
 #include<QGraphicsItem>
@@ -24,64 +24,56 @@
 #include<QMap>
 #include<QTimer>
 
-class Sprite : public QObject, public QGraphicsItem
+class GSprite : public QObject, public QGraphicsItem
 {
+
     Q_OBJECT
+    Q_INTERFACES()
 
 public:
 
-    Sprite(int width, int height, QString spritePath);
+    GSprite(int width, int height, QString spritePath);
 
-    virtual ~Sprite();
+    virtual ~GSprite();
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
+     * @brief boundingRect
      * @return
-     **/
+     */
     QRectF boundingRect() const override;
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
-     * @return
-     **/
+     * @brief paint
+     * @param painter
+     * @param option
+     * @param widget
+     */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
-     * @return
-     **/
+     * @brief addAnimationId
+     * @param animationId
+     * @param pixmapRow
+     */
     void addAnimationId(QString animationId, int pixmapRow);
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
-     * @return
-     **/
+     * @brief setAnimation
+     * @param animationId
+     */
     void setAnimation(QString animationId);
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
-     * @return
-     **/
+     * @brief setFps
+     * @param fps
+     */
     void setFps(int fps);
 
 protected slots:
 
     /**
-     * @brief AS: TODO
-     * @param
-     *
-     * @return
-     **/
+     * @brief updateFrameSlot
+     */
     void updateFrameSlot();
 
 private:
@@ -133,4 +125,6 @@ private:
     static QTimer* _pBaseFpsTimer;
 };
 
-#endif // SPRITE_H
+typedef std::shared_ptr<GSprite> GSpritePtr;
+
+#endif // GSPRITE_H
