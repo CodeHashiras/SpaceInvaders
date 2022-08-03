@@ -1,6 +1,6 @@
 #include "gui/GameGUI.h"
 #include "ui_gamegui.h"
-#include "gui/Sprite.h"
+#include "gui/GSprite.h"
 
 GameGUI::GameGUI(QWidget *parent)
     : QMainWindow(parent)

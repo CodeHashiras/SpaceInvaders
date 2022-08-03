@@ -9,13 +9,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    gui/GScene.cpp \
+    gui/GSprite.cpp \
     gui/GameGUI.cpp \
-    gui/Sprite.cpp \
     main.cpp \
 
 HEADERS += \
-    gui/GameGUI.h \
-    gui/Sprite.h
+    gui/GScene.h \
+    gui/GSprite.h \
+    gui/GameGUI.h
 
 FORMS += \
     gui/gamegui.ui
