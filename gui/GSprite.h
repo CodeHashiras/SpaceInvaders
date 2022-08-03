@@ -3,7 +3,7 @@
  *
  * @authors CodeHashiras
  *
- * @class Sprite
+ * @class GSprite
  *
  * @brief This class is an image handler to show game sprites on screen, wich are graphic representations of game elements.
  *
@@ -36,92 +36,103 @@ public:
 
     virtual ~GSprite();
 
-    /**
-     * @brief boundingRect
-     * @return
-     */
     QRectF boundingRect() const override;
 
-    /**
-     * @brief paint
-     * @param painter
-     * @param option
-     * @param widget
-     */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     /**
-     * @brief addAnimationId
-     * @param animationId
-     * @param pixmapRow
+     * @brief addAnimationId creates an animation name for a specific pixmap row (e.g. addAnimationId("player running", 1))
+     * @param animationId is the string to be set as nickname for the pixmap row
+     * @param pixmapRow is the row number you want to set a nickname of
      */
     void addAnimationId(QString animationId, int pixmapRow);
 
     /**
-     * @brief setAnimation
-     * @param animationId
+     * @brief setAnimation sets an animation based on a animation id (e.g. setAnimation("player running"))
+     * @param animationId is the string which represents a pixmap row
      */
     void setAnimation(QString animationId);
 
     /**
-     * @brief setFps
-     * @param fps
+     * @brief setFrame sets a specific animation frame
+     * @param frameNumber is the animation frame number you want to set
+     */
+    void setFrame(int frameNumber);
+
+    /**
+     * @brief setFps sets animation frames per second
+     * @param fps are the frames per second
      */
     void setFps(int fps);
+
+    /**
+     * @brief pauseAnimation pauses animation
+     */
+    void pauseAnimation();
+
+    /**
+     * @brief resumeAnimation resumes animation
+     */
+    void resumeAnimation();
 
 protected slots:
 
     /**
-     * @brief updateFrameSlot
+     * @brief updateFrameSlot updates current animation frame based on fps value
      */
     void updateFrameSlot();
 
 private:
 
-    const int   PIXMAP_QRECTF_X_AXIS_ORIGIN = 0;                        //
-    const int   PIXMAP_QRECTF_Y_AXIS_ORIGIN = 0;                        //
-    const int   DEFAULT_FPS_VALUE = 15;                                 //
-    const int   DEFAULT_CURRENT_ANIMATION = 0;                          //
-    const int   DEFAULT_CURRENT_FRAME = 0;                              //
-    const float DEFAULT_CURRENT_TIME_SCALED_FRAME = 0.0f;               //
-    const float ONE_SECOND_IN_MS = 1000.0f;                             //
-    const int   BASE_FPS_TIME_IN_MS = 10;                               //
-    const int   MAX_FPS_VALUE = ONE_SECOND_IN_MS / BASE_FPS_TIME_IN_MS; //
+    const int   PIXMAP_QRECTF_X_AXIS_ORIGIN = 0;                        // Value to be taken as QRect x axis begining
+    const int   PIXMAP_QRECTF_Y_AXIS_ORIGIN = 0;                        // Value to be taken as QRect y axis begining
+    const int   DEFAULT_FPS_VALUE = 15;
+    const int   DEFAULT_CURRENT_ANIMATION = 0;
+    const int   DEFAULT_CURRENT_FRAME = 0;
+    const float DEFAULT_CURRENT_TIME_SCALED_FRAME = 0.0f;
+    const float ONE_SECOND_IN_MS = 1000.0f;
+    const int   BASE_FPS_TIME_IN_MS = 10;                               // Value used to set refresh timer rate (i.e. refresh timer routine is triggered every 10 ms)
+    const int   MIN_FPS_VALUE = 0;                                      // Min fps value shouldn't be a negative number by convention
+    const int   MAX_FPS_VALUE = ONE_SECOND_IN_MS / BASE_FPS_TIME_IN_MS; // Max fps value based on refresh timer rate (i.e 100 fps in our case)
 
-    // AS: TODO
+
+    // Frames per second
     int _fps;
 
-    // AS: TODO
+    // Sprite width
     int _width;
 
-    // AS: TODO
+    // Sprite height
     int _height;
 
-    // AS: TODO
+    // Computed value for max number of frames according to sprite and pixmap width
     int _spriteMaxFrames;
 
-    // AS: TODO
+    // Computed value for max number of animations according to sprite and pixmap height
     int _spriteMaxAnimations;
 
-    // AS: TODO
+    // Current sprite animation shown on screen
     int _currentAnimation;
 
-    // AS: TODO
+    // Current sprite frame shown on screen
     int _currentFrame;
 
-    // AS: TODO
+    // Represents the animation state of paused
+    bool _isAnimationPaused;
+
+    // Current sprite frame value of a determined time. Used to adapt frame transition based on fps value
     float _currentTimeScaledFrame;
 
-    // AS: TODO
-    QPixmap *_pixmap;
+    // Sprite Qpixmap raw pointer
+    QPixmap *_pPixmap;
 
-    // AS: TODO
+    // QMap to relate animation identifiers with pixmap row numbers
     QMap<QString, int> _animationIdsMap;
 
-    // AS: TODO
+    // Number of created GSprite instances during runtime. Used to free memory
     static int _instanceCounter;
 
-    // AS: TODO
+    // Refresh timer to update sprite frames on screen
     static QTimer* _pBaseFpsTimer;
 };
 

@@ -34,8 +34,18 @@ public:
      */
     GScene();
 
+    /**
+     * @brief connectOnSetSceneRequested
+     * @param func
+     * @param qObject
+     * @return
+     */
     bool connectOnSetSceneRequested(std::function<void(std::shared_ptr<GScene>)> func, QObject* qObject);
 
+    /**
+     * @brief addSpriteToSceneGUI
+     * @param gSpritePtr
+     */
     void addSpriteToSceneGUI(GSpritePtr gSpritePtr);
 
     //addTextToSceneGUI(GTextPtr gText) override;
