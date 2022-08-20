@@ -20,6 +20,7 @@
 #include <QObject>
 #include <QGraphicsScene>
 #include <QMap>
+
 #include "gui/GSprite.h"
 
 class GScene : public QGraphicsScene
@@ -32,7 +33,12 @@ public:
     /**
      * @brief GScene
      */
-    GScene();
+    GScene(std::shared_ptr<QMap<QString, std::shared_ptr<GScene>>> gScenesMapPtr);
+
+    /**
+     * @brief refreshGUI
+     */
+    virtual void refreshGUI();
 
     /**
      * @brief connectOnSetSceneRequested
@@ -78,8 +84,17 @@ protected:
 
 private:
 
+    /**
+     * @brief changeGScene
+     * @param gSceneId
+     */
+    void changeGScene(QString gSceneId);
+
     //
     QMap<QString, QString> _pathToSpriteID;
+
+    //
+    std::shared_ptr<QMap<QString, std::shared_ptr<GScene>>> _gScenesMapPtr;
 };
 
 typedef std::shared_ptr<GScene> GScenePtr;

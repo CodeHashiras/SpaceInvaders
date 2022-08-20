@@ -1,8 +1,8 @@
 #include "GScene.h"
 
-GScene::GScene()
+GScene::GScene(std::shared_ptr<QMap<QString, GScenePtr>> gScenesMapPtr)
+    : _gScenesMapPtr(gScenesMapPtr)
 {
-
 }
 
 
@@ -28,4 +28,10 @@ void GScene::setIdToSpriteImagePath(QString Id, QString imagePath)
 QString GScene::getPathToSprite(QString Id)
 {
     return _pathToSpriteID[Id];
+}
+
+
+void GScene::changeGScene(QString gSceneId)
+{
+    emit signalSetSceneRequested(_gScenesMapPtr->value(gSceneId));
 }
