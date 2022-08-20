@@ -12,12 +12,14 @@ SOURCES += \
     gui/GScene.cpp \
     gui/GSprite.cpp \
     gui/GameGUI.cpp \
+    gui/MenuScene.cpp \
     main.cpp \
 
 HEADERS += \
     gui/GScene.h \
     gui/GSprite.h \
-    gui/GameGUI.h
+    gui/GameGUI.h \
+    gui/MenuScene.h
 
 FORMS += \
     gui/gamegui.ui

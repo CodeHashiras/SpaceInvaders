@@ -36,9 +36,9 @@ public:
     GScene(std::shared_ptr<QMap<QString, std::shared_ptr<GScene>>> gScenesMapPtr);
 
     /**
-     * @brief refreshGUI
+     * @brief refreshGSceneGUI
      */
-    virtual void refreshGUI();
+    virtual void refreshGSceneGUI();
 
     /**
      * @brief connectOnSetSceneRequested

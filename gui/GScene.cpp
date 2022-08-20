@@ -5,6 +5,10 @@ GScene::GScene(std::shared_ptr<QMap<QString, GScenePtr>> gScenesMapPtr)
 {
 }
 
+void GScene::refreshGSceneGUI()
+{
+
+}
 
 bool GScene::connectOnSetSceneRequested(std::function<void(GScenePtr)> func, QObject* qObject)
 {
