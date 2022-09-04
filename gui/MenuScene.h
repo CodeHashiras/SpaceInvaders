@@ -10,7 +10,7 @@ class MenuScene : public GScene
 
 public:
 
-    MenuScene(std::shared_ptr<QMap<QString, GScenePtr>> gScenesMapPtr);
+    MenuScene();
 
 protected:
 

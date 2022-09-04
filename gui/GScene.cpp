@@ -1,7 +1,6 @@
 #include "GScene.h"
 
-GScene::GScene(std::shared_ptr<QMap<QString, GScenePtr>> gScenesMapPtr)
-    : _gScenesMapPtr(gScenesMapPtr)
+GScene::GScene()
 {
 }
 
@@ -10,7 +9,7 @@ void GScene::refreshGSceneGUI()
 
 }
 
-bool GScene::connectOnSetSceneRequested(std::function<void(GScenePtr)> func, QObject* qObject)
+bool GScene::connectOnSetSceneRequested(QObject* qObject, std::function<void(QString gSceneId)> func)
 {
     bool connected = connect(this, &GScene::signalSetSceneRequested, qObject, func);
     return connected;
@@ -37,5 +36,5 @@ QString GScene::getPathToSprite(QString Id)
 
 void GScene::changeGScene(QString gSceneId)
 {
-    emit signalSetSceneRequested(_gScenesMapPtr->value(gSceneId));
+    emit signalSetSceneRequested(gSceneId);
 }

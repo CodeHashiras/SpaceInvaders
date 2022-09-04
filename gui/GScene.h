@@ -33,7 +33,7 @@ public:
     /**
      * @brief GScene
      */
-    GScene(std::shared_ptr<QMap<QString, std::shared_ptr<GScene>>> gScenesMapPtr);
+    GScene();
 
     /**
      * @brief refreshGSceneGUI
@@ -46,7 +46,7 @@ public:
      * @param qObject
      * @return
      */
-    bool connectOnSetSceneRequested(std::function<void(std::shared_ptr<GScene>)> func, QObject* qObject);
+    bool connectOnSetSceneRequested(QObject* qObject, std::function<void(QString gSceneId)> func);
 
     /**
      * @brief addSpriteToSceneGUI
@@ -62,9 +62,9 @@ signals:
 
     /**
      * @brief signalSetSceneRequested
-     * @param qGraphicsScene
+     * @param gSceneId
      */
-    void signalSetSceneRequested(std::shared_ptr<GScene> GScenePtr);
+    void signalSetSceneRequested(QString gSceneId);
 
 protected:
 
@@ -92,9 +92,6 @@ private:
 
     //
     QMap<QString, QString> _pathToSpriteID;
-
-    //
-    std::shared_ptr<QMap<QString, std::shared_ptr<GScene>>> _gScenesMapPtr;
 };
 
 typedef std::shared_ptr<GScene> GScenePtr;

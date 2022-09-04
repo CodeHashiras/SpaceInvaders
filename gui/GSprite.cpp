@@ -21,13 +21,13 @@ GSprite::GSprite(int width, int height, QString spritePath)
     _spriteMaxFrames = _pPixmap->width()/_width;
     // Compute maximun columns value dividing sprite width by pixmap width
     _spriteMaxAnimations = _pPixmap->height()/_height;
-    // If base fps timer has not being actiated yet, start it
+    // If base fps timer has not being activated yet, start it
     if (!GSprite::_pBaseFpsTimer->isActive())
     {
         GSprite::_pBaseFpsTimer->start(BASE_FPS_TIME_IN_MS);
     }
     // Connect timeout signal to update frame slot method
-    connect(GSprite::_pBaseFpsTimer, &QTimer::timeout, this, &GSprite::updateFrameSlot);
+    GSprite::_pBaseFpsTimer->callOnTimeout(this, &GSprite::updateFrameSlot);
 }
 
 GSprite::~GSprite()

@@ -1,7 +1,6 @@
 #include "MenuScene.h"
 
-MenuScene::MenuScene(std::shared_ptr<QMap<QString, GScenePtr>> gScenesMapPtr)
-    : GScene(gScenesMapPtr)
+MenuScene::MenuScene()
 {
 
 }
