@@ -12,12 +12,28 @@ SOURCES += \
     gui/GScene.cpp \
     gui/GSprite.cpp \
     gui/GameGUI.cpp \
+    logic/Block.cpp \
+    logic/Bullet.cpp \
+    logic/Enemy.cpp \
+    logic/GObject.cpp \
+    logic/Game.cpp \
+    logic/Player.cpp \
+    logic/main.cpp \
     main.cpp \
 
 HEADERS += \
     gui/GScene.h \
     gui/GSprite.h \
-    gui/GameGUI.h
+    gui/GameGUI.h \
+    logic/Block.h \
+    logic/Bullet.h \
+    logic/Constants.h \
+    logic/Enemy.h \
+    logic/GObject.h \
+    logic/Game.h \
+    logic/IMovable.h \
+    logic/IShootable.h \
+    logic/Player.h
 
 FORMS += \
     gui/gamegui.ui
